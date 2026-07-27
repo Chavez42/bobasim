@@ -1,0 +1,74 @@
+{
+  "_readme": "Edit this file to publish progress. Redeploy and the page updates. Nothing else needs touching. Newest entry goes FIRST in the entries array.",
+
+  "status": {
+    "phase": "M1 — vertical slice",
+    "updated": "2026-07-27",
+    "note": "One drink, end to end. Liquid shader and pour transfer working; sealer and scoring next."
+  },
+
+  "milestones": [
+    { "id": "M0", "name": "Project foundation",     "percent": 100 },
+    { "id": "M1", "name": "One drink, end to end",  "percent": 45  },
+    { "id": "M2", "name": "Full drink system",      "percent": 0   },
+    { "id": "M3", "name": "The prep loop",          "percent": 0   },
+    { "id": "M4", "name": "Service and economy",    "percent": 0   },
+    { "id": "M5", "name": "Progression",            "percent": 0   },
+    { "id": "M6", "name": "Location and decoration","percent": 0   },
+    { "id": "M7", "name": "Multiplayer",            "percent": 0   },
+    { "id": "M8", "name": "Marketing and meta",     "percent": 0   },
+    { "id": "M9", "name": "Polish and content",     "percent": 0   }
+  ],
+
+  "entries": [
+    {
+      "id": "003",
+      "date": "2026-07-27",
+      "title": "The liquid reads correctly when you tilt it",
+      "tags": ["Drink system", "Shaders"],
+      "body": "The clip-plane approach is holding up. The surface stays flat in world space no matter how the cup rotates, which was the whole reason not to just scale a mesh on Y.\n\nWobble is driven from the cup's velocity and angular velocity, damped in C# and fed to the shader as two sine offsets. It settles in about a second, which feels right — any faster and it reads as stiff, any slower and it looks like syrup.\n\nBand count is capped at four. Tried six and the drink became unreadable at arm's length, which is exactly the failure the design doc predicted.",
+      "bullets": [
+        "Clip plane holds flat through full cup rotation",
+        "Wobble damping tuned to ~1s settle",
+        "Four visible bands maximum, merging logic handles the rest"
+      ],
+      "image": "",
+      "caption": ""
+    },
+    {
+      "id": "002",
+      "date": "2026-07-20",
+      "title": "Pour transfer works across the whole chain",
+      "tags": ["Drink system", "Systems"],
+      "body": "IContainer is now implemented by cups, shakers, pitchers and the floor drain. You can brew into a pitcher, chill it, then pour that pitcher into a cup, and the ingredient identity, temperature and batch freshness survive the entire chain.\n\nSpills work by exception rather than by special case: if the downward spherecast hits anything that is not an IContainer, it is a spill. That one decision removed a lot of code I thought I would have to write.",
+      "bullets": [
+        "Flow rate curves by tilt angle",
+        "Temperature averages by volume on merge",
+        "Spill detection falls out of the same cast"
+      ],
+      "image": "",
+      "caption": ""
+    },
+    {
+      "id": "001",
+      "date": "2026-07-13",
+      "title": "Foundation done — and the scorer has tests before it has a station",
+      "tags": ["Foundation", "Architecture"],
+      "body": "Assembly definitions are in from day one. Boba.Simulation has zero Unity scene dependencies, which means the quality scorer, freshness curves and economy all run as plain C# under the test framework without entering play mode.\n\nWrote the scorer first, tested it against fabricated drinks, and only then started building anything that could physically make one. Recommend this order to anyone doing a crafting sim.",
+      "bullets": [
+        "Nine asmdefs, Simulation isolated from UnityEngine",
+        "Quality scorer covered by edit-mode tests",
+        "Play-from-Boot editor script in place"
+      ],
+      "image": "",
+      "caption": ""
+    }
+  ],
+
+  "links": [
+    { "label": "YouTube",  "url": "#" },
+    { "label": "Discord",  "url": "#" },
+    { "label": "X",        "url": "#" },
+    { "label": "Steam",    "url": "#" }
+  ]
+}
